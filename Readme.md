@@ -1,5 +1,12 @@
 # Scrapy Code Generator With Example
 
+# Components
+1. Custom Item
+2. Custom Item Loader
+3. Pipelines
+4. Processor Class
+5. Saver Class
+6. Item Store
 ## How to see demo ?
 1. Install requirements in requirements.txt
 2. Run scrapper.py
