@@ -1,10 +1,11 @@
 from scrapy.exceptions import DropItem
 from .item import CountryItem
+from .config import Config
 
 class CountryItemProcessorPipeline(object):
 
     def process_item(self, item, spider):
-        item["density"] = round(item["population"] / item["area"],2)
+        item[Config.density] = round(item[Config.population] / item[Config.area],2)
         return item
 
 class CountryItemSaverPipeline(object):

@@ -1,0 +1,5 @@
+setup.py
+ScrapyCodeGenExample.egg-info/PKG-INFO
+ScrapyCodeGenExample.egg-info/SOURCES.txt
+ScrapyCodeGenExample.egg-info/dependency_links.txt
+ScrapyCodeGenExample.egg-info/top_level.txt

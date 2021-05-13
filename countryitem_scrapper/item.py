@@ -1,6 +1,7 @@
 from scrapy.item import Item, Field
 from itemloaders.processors import MapCompose, TakeFirst, Compose
 from scrapy.loader import ItemLoader
+from .config import Config
 
 
 class CountryItem(Item):
@@ -12,11 +13,11 @@ class CountryItem(Item):
 
     def json(self):
         return {
-            "name" : self["name"],
-            "capital" : self["capital"],
-            "population" : self["population"],
-            "area" : self["area"],
-            "density" : self["density"]
+            "name" : self[Config.name],
+            "capital" : self[Config.capital],
+            "population" : self[Config.population],
+            "area" : self[Config.area],
+            "density" : self[Config.density]
         }
 
 class CountryLoader(ItemLoader):
