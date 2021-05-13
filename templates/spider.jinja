@@ -1,0 +1,30 @@
+import scrapy
+from scrapy.loader import ItemLoader
+
+from .item import {{name}}
+
+class {{name}}Spider(scrapy.Spider):
+    name = '{{name.lower()}}'
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            '{{name.lower()}}_scrapper.pipeline.{{name}}ProcessorPipeline': 100,
+            '{{name.lower()}}_scrapper.pipeline.{{name}}SaverPipeline' : 200
+        }
+    }
+
+    def __init__(self, url, output):
+        self.start_urls = [
+            url
+        ]
+        self.output = output
+
+
+    def parse(self, response):
+        quotes = response.css(".quote")
+        output = []
+        for quote in quotes:
+            loader = ItemLoader(item={{name}}(), selector=quote)
+            loader.add_css("field", ".author::text")
+
+            quote_item = loader.load_item()
+            yield quote_item

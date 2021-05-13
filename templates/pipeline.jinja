@@ -1,0 +1,13 @@
+from scrapy.exceptions import DropItem
+from .item import {{name}}
+
+class {{name}}ProcessorPipeline(object):
+
+    def process_item(self, item, spider):
+        return item
+
+class {{name}}SaverPipeline(object):
+
+    def process_item(self, item : {{name}}, spider):
+        spider.output.add(item.json())
+        raise DropItem
