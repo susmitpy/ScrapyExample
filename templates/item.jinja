@@ -1,19 +1,23 @@
 from scrapy.item import Item, Field
-from itemloaders.processors import MapCompose, TakeFirst
+from itemloaders.processors import MapCompose, TakeFirst, Compose
+from scrapy.loader import ItemLoader
+from .config import Config
 
-class {{name}}Processor:
-
-    @staticmethod
-    def process_field(text):
-        return text.upper()
 
 class {{name}}(Item):
-    field = Field(
-        input_processor = MapCompose({{name}}Processor.process_field),
-        output_processor = TakeFirst()
-    )
+    name : str = Field()
 
     def json(self):
         return {
-            "field" : self["field"]
+            "name" : self[Config.name]
         }
+
+class {{name[:-4]}}Loader(ItemLoader):
+    default_item_class = {{name}}
+    default_output_processor = TakeFirst()
+    
+    name_in = Compose(lambda x: x[1])
+    name_out = Compose(
+            MapCompose(str.strip, str.upper),
+            TakeFirst()
+    )

@@ -1,7 +1,6 @@
 import scrapy
-from scrapy.loader import ItemLoader
-
 from .item import CountryItem, CountryLoader
+from .config import Config
 
 class CountryItemSpider(scrapy.Spider):
     name = 'countryitem'
@@ -24,11 +23,10 @@ class CountryItemSpider(scrapy.Spider):
         output = []
         for country in countries:
             loader = CountryLoader(selector=country)
-            loader.add_css("name", ".country-name::text")
-            loader.add_css("capital", ".country-capital::text")
-            loader.add_css("population", ".country-population::text")
-            loader.add_css("area", ".country-area::text")
+            loader.add_css(Config.name, ".country-name::text")
+            loader.add_css(Config.capital, ".country-capital::text")
+            loader.add_css(Config.population, ".country-population::text")
+            loader.add_css(Config.area, ".country-area::text")
 
-            quote_item = loader.load_item()
-            self.logger.info(quote_item["name"])
-            yield quote_item
+            item = loader.load_item()
+            yield item

@@ -1,7 +1,6 @@
 import scrapy
-from scrapy.loader import ItemLoader
-
-from .item import {{name}}
+from .item import {{name}}, {{name[:-4]}}Loader
+from .config import Config
 
 class {{name}}Spider(scrapy.Spider):
     name = '{{name.lower()}}'
@@ -20,11 +19,11 @@ class {{name}}Spider(scrapy.Spider):
 
 
     def parse(self, response):
-        quotes = response.css(".quote")
+        countries = response.css(".country")
         output = []
-        for quote in quotes:
-            loader = ItemLoader(item={{name}}(), selector=quote)
-            loader.add_css("field", ".author::text")
+        for country in countries:
+            loader = CountryLoader(selector=country)
+            loader.add_css(Config.name, ".country-name::text")
 
-            quote_item = loader.load_item()
-            yield quote_item
+            item = loader.load_item()
+            yield item
