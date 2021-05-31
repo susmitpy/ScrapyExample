@@ -6,18 +6,10 @@ from .config import Config
 
 class CountryItem(Item):
     name : str = Field()
-    capital : str = Field()
-    population : int = Field()
-    area : float = Field()
-    density : float = Field()
 
     def json(self):
         return {
-            "name" : self[Config.name],
-            "capital" : self[Config.capital],
-            "population" : self[Config.population],
-            "area" : self[Config.area],
-            "density" : self[Config.density]
+            "name" : self[Config.name]
         }
 
 class CountryLoader(ItemLoader):
@@ -29,7 +21,3 @@ class CountryLoader(ItemLoader):
             MapCompose(str.strip, str.upper),
             TakeFirst()
     )
-
-    population_in = MapCompose(lambda x: int(x))
-    area_in = MapCompose(lambda x: float(x))
-

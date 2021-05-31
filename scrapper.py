@@ -11,8 +11,7 @@ def get_crawl_runner():
     return CrawlerRunner(
     {
     'USER_AGENT': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0',
-        "LOG_LEVEL" : "INFO",
-        "LOG_FILE" : "./log.log"
+        "LOG_LEVEL" : "INFO"
     })
 
 crawl_runner = get_crawl_runner()
@@ -28,9 +27,9 @@ def scrape_with_crochet(stores : List[CountryItemStore], urls : List[str]):
 def run():
     stores = [CountryItemStore()]
     urls = ["https://scrapethissite.com/pages/simple/"]
-    
+
     scrape_with_crochet(stores,urls)
     output = stores[0].data
-    print(output[:5])
+    print(output)
    
 run()

@@ -5,7 +5,6 @@ from .config import Config
 class CountryItemProcessorPipeline(object):
 
     def process_item(self, item, spider):
-        item[Config.density] = round(item[Config.population] / item[Config.area],2)
         return item
 
 class CountryItemSaverPipeline(object):

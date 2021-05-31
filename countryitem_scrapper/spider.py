@@ -24,9 +24,6 @@ class CountryItemSpider(scrapy.Spider):
         for country in countries:
             loader = CountryLoader(selector=country)
             loader.add_css(Config.name, ".country-name::text")
-            loader.add_css(Config.capital, ".country-capital::text")
-            loader.add_css(Config.population, ".country-population::text")
-            loader.add_css(Config.area, ".country-area::text")
 
             item = loader.load_item()
             yield item
